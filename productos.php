@@ -23,17 +23,17 @@ class Productos {
 
     public function post() {
         $data = json_decode(file_get_contents("php://input"));
-        $query = "INSERT INTO " . $this->table_name . " (nombre, descripcion, precio, categoria_id, proveedor_id, estado, creado_por, modificado_por) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO " . $this->table_name . " (nombre, descripcion, precio, proveedor_id, estado, creado_por, modificado_por) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$data->nombre, $data->descripcion, $data->precio, $data->categoria_id, $data->proveedor_id, $data->estado, $data->creado_por, $data->modificado_por]);
+        $stmt->execute([$data->nombre, $data->descripcion, $data->precio, $data->proveedor_id, $data->estado, $data->creado_por, $data->modificado_por]);
         echo json_encode(["message" => "Producto creado"]);
     }
 
     public function put() {
         $data = json_decode(file_get_contents("php://input"));
-        $query = "UPDATE " . $this->table_name . " SET nombre = ?, descripcion = ?, precio = ?, categoria_id = ?, proveedor_id = ?, estado = ?, modificado_por = ? WHERE id = ?";
+        $query = "UPDATE " . $this->table_name . " SET nombre = ?, descripcion = ?, precio = ?, proveedor_id = ?, estado = ?, modificado_por = ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$data->nombre, $data->descripcion, $data->precio, $data->categoria_id, $data->proveedor_id, $data->estado, $data->modificado_por, $data->id]);
+        $stmt->execute([$data->nombre, $data->descripcion, $data->precio, $data->proveedor_id, $data->estado, $data->modificado_por, $data->id]);
         echo json_encode(["message" => "Producto actualizado"]);
     }
 
