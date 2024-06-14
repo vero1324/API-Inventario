@@ -1,9 +1,14 @@
 <?php
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE");
-header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Methods: PUT, POST, DELETE, GET, OPTIONS');
+header('Access-Control-Max-Age: 3600');
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin, Authorization, X-Requested-With');
 
-include_once 'db.php';
+include_once '../config/database.php';
+
+$database = new DatabasesConexion();
+$db = $database->obtenerConn();
 
 class Proveedores {
     private $conn;
