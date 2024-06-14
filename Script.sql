@@ -6,7 +6,7 @@ USE multimedios022;
 
 -- Crear la tabla Usuarios
 CREATE TABLE Usuarios (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    idUsuarios INT IDENTITY(1,1) PRIMARY KEY,
     nombre NVARCHAR(255) NOT NULL,
     email NVARCHAR(255) UNIQUE NOT NULL,
     password NVARCHAR(255) NOT NULL,
@@ -15,19 +15,19 @@ CREATE TABLE Usuarios (
 
 -- Crear la tabla Proveedores
 CREATE TABLE Proveedores (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    idProveedores INT IDENTITY(1,1) PRIMARY KEY,
     nombre NVARCHAR(255) NOT NULL,
     contacto NVARCHAR(255),
     direccion NVARCHAR(MAX),
     creado_por INT,
     modificado_por INT,
-    FOREIGN KEY (creado_por) REFERENCES Usuarios(id),
-    FOREIGN KEY (modificado_por) REFERENCES Usuarios(id)
+    FOREIGN KEY (creado_por) REFERENCES Usuarios(idUsuarios),
+    FOREIGN KEY (modificado_por) REFERENCES Usuarios(idUsuarios)
 );
 
 -- Crear la tabla Productos
 CREATE TABLE Productos (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    idProductos INT IDENTITY(1,1) PRIMARY KEY,
     nombre NVARCHAR(255) NOT NULL,
     descripcion NVARCHAR(MAX),
     precio DECIMAL(10, 2),
@@ -35,20 +35,20 @@ CREATE TABLE Productos (
     estado NVARCHAR(50),
     creado_por INT,
     modificado_por INT,
-    FOREIGN KEY (proveedor_id) REFERENCES Proveedores(id),
-    FOREIGN KEY (creado_por) REFERENCES Usuarios(id),
-    FOREIGN KEY (modificado_por) REFERENCES Usuarios(id)
+    FOREIGN KEY (proveedor_id) REFERENCES Proveedores(idProveedores),
+    FOREIGN KEY (creado_por) REFERENCES Usuarios(idUsuarios),
+    FOREIGN KEY (modificado_por) REFERENCES Usuarios(idUsuarios)
 );
 
 -- Crear la tabla Inventarios
 CREATE TABLE Inventarios (
-    id INT IDENTITY(1,1) PRIMARY KEY,
+    idInventarios INT IDENTITY(1,1) PRIMARY KEY,
     producto_id INT,
     cantidad INT,
     ubicacion NVARCHAR(255),
     creado_por INT,
     modificado_por INT,
-    FOREIGN KEY (producto_id) REFERENCES Productos(id),
-    FOREIGN KEY (creado_por) REFERENCES Usuarios(id),
-    FOREIGN KEY (modificado_por) REFERENCES Usuarios(id)
+    FOREIGN KEY (producto_id) REFERENCES Productos(idProductos),
+    FOREIGN KEY (creado_por) REFERENCES Usuarios(idUsuarios),
+    FOREIGN KEY (modificado_por) REFERENCES Usuarios(idUsuarios)
 );
