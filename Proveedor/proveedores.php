@@ -1,14 +1,16 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Methods: PUT, POST, DELETE, GET, OPTIONS');
-header('Access-Control-Max-Age: 3600');
-header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin, Authorization, X-Requested-With');
+ header('Access-Control-Allow-Origin: *');
+ header('Content-Type: application/json; charset=utf-8');
+ header('Access-Control-Allow-Methods: PUT, POST, DELETE, GET, OPTIONS');
+ header('Access-Control-Max-Age: 3600');
+ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Origin, Authorization, X-Requested-With');
 
-include_once '../config/database.php';
+ include_once '../config/database.php';
 
-$database = new DatabasesConexion();
-$db = $database->obtenerConn();
+ $database = new DatabasesConexion();
+ $db = $database->obtenerConn();
+
+ $request_method = $_SERVER["REQUEST_METHOD"];
 
 class Proveedores {
     private $conn;
@@ -62,4 +64,16 @@ switch($request_method) {
         $provider->get();
         break;
     case 'POST':
-        $provider->
+        $provider->post();
+        break;
+    case 'PUT':
+        $provider->put();
+        break;
+    case 'DELETE':
+        $provider->delete();
+        break;
+    default:
+        header("HTTP/1.0 405 Method Not Allowed");
+        break;
+}
+?>
